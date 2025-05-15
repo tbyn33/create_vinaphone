@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sim Mạng Vinaphone</title>
+    <link rel="icon" type="image/x-icon" href="favicon_vina1.png">
+   <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .update-box {
+            width: 100%;
+            text-align: center;
+            background: #4953a0;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #f8f8f8;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .card, .price-box {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .card-header {
+            background: #1e90ff;
+            color: #fff;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .card-header span {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #fff;
+            color: #1e90ff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .info div {
+            text-align: center;
+            flex: 1;
+        }
+
+        .info div img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+
+        .info div span {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .details {
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .details ul li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .details ul li::before {
+            content: "✔";
+            color: #1e90ff;
+            margin-right: 8px;
+        }
+
+        .esim {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .esim span {
+            color: #1e90ff;
+        }
+
+        .price-box {
+            text-align: center;
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .price-box h3 {
+            color: #1e90ff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .original-price {
+            color: gray;
+            text-decoration: line-through;
+        }
+
+        .discounted-price {
+            color: red;
+            font-size: 22px;
+        }
+
+        .out-of-stock {
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .separator {
+            width: 100%;
+            height: 2px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card, .price-box {
+                width: 90%;
+                max-width: 400px;
+            }
+        }
+
+
+div.stars {
+  width: 200px;
+  display: inline-block;
+}
+ 
+input.star { display: none; }
+ 
+label.star {
+  float: right;
+  padding: 8px;
+  font-size: 25px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+ 
+input.star-5:checked ~ label.star:before {
+  color: #FE7;
+  text-shadow: 0 0 15px #952;
+}
+ 
+input.star-1:checked ~ label.star:before { color: #F62; }
+ 
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+ 
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+    </style>
+
+
+
+
+
+</head>
+<body>
+
+
+
+<div class="container">
+    <div class="update-box">
+        <h1>Sim Vinaphone Chính Hãng</h1>
+        <p>Đa dạng gói cước - Hỗ trợ eSIM - Giá tốt</p>
+      </div>
+    Liên hệ chọn số :<a href="https://www.facebook.com/Teii.husc"> Click Here </a>
+    
+    </div>
+</div>
+
+<div class="separator"></div>
+
+<div class="separator"></div>
+  <div class="container">
+    <div class="card">
+        <div class="card-header">
+            12TD49
+            <span>vinaphone</span>
+        </div>
+        <div class="card-body">
+            <div class="info">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data">
+                    <span>100GB<br>Data/Tháng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Nội mạng">
+                    <span class="disabled">Có Gọi<br>Nội mạng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Ngoại mạng">
+                    <span class="disabled">Có Gọi<br>Ngoại mạng</span>
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    <li>Có 100GB Tốc Độ Cao, Hết Dung Lượng Ngừng Truy Cập</li>
+                    <li>Data không bị chia ngày chia giờ</li>
+                    <li>Trọn Gói 12 Tháng, Không Phải Nạp Thêm Tiền</li>
+                    <li>Sim  nguyên kít đăng ký chính chủ</li>
+                    <li>Từ năm thứ 2 tháng 49K hoặc gia hạn 490k/năm</li>
+                    <li>Sim có nghe gọi bình thường,Multisim</li>
+                </ul>
+            </div>
+            <div class="esim">
+                Hỗ trợ Esim: <span>Có (Fee 50K) </span>
+            </div>
+          <div class="zalo">
+                <strong> LH Đặt Hàng Zalo: </strong><span><a href=http://zalo.me/0357855015>0357855015</a></span>
+            </div>
+<div class="stars">
+  <form action="">
+    <input class="star star-5" id="star-5" type="radio" name="star"/>
+    <label class="star star-5" for="star-5"></label>
+    <input class="star star-4" id="star-4" type="radio" name="star"/>
+    <label class="star star-4" for="star-4"></label>
+    <input class="star star-3" id="star-3" type="radio" name="star"/>
+    <label class="star star-3" for="star-3"></label>
+    <input class="star star-2" id="star-2" type="radio" name="star"/>
+    <label class="star star-2" for="star-2"></label>
+    <input class="star star-1" id="star-1" type="radio" name="star"/>
+    <label class="star star-1" for="star-1"></label>
+  </form>
+</div>
+
+
+
+            <br><marquee><span class="marquee-span"><font color="blue">⭐HTTPS://VANTAY.CLICK⭐</font></span></marquee>
+        </div>
+    </div>
+    
+    <div class="price-box">
+        <h3>Giá Sim Chưa Kích Hoạt</h3>
+        <p class="price discounted-price">690.000đ</p>
+       <p class="price original-price">Giá gốc 1.250.000đ</p>
+    </div>
+    <div class="price-box">
+        <h3>Giá Sim Đã Kích Hoạt</h3>
+        <p class="price discounted-price">630.000đ - Hết Hàng</p>
+       <p class="price original-price">Giá gốc 1.150.000đ</p>
+    </div>
+</div>
+
+<!-- Nội dung gốc giữ nguyên ở đây -->
+   <div class="container">
+    <div class="card">
+        <div class="card-header">
+            U1500
+            <span>vinaphone</span>
+        </div>
+        <div class="card-body">
+            <div class="info">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data">
+                    <span>500GB<br>Data/Tháng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Nội mạng">
+                    <span class="disabled">Không Nghe<br>Gọi Được</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Ngoại mạng">
+                    <span class="disabled">Phát Wifi <br>Rất tốt</span>
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    <li>Miễn phí sử dụng 12 tháng liên tục</li>
+                    <li>Mỗi tháng 500Gb không chia ngày</li>
+                    <li>Phát wifi thả ga,Multisim</li>
+                    <li>Hàng nguyên kích vào tên chính chủ</li>
+                    <li>Hàng sẵn dùng lắp là sử dụng</li>
+                </ul>
+            </div>
+            <div class="esim">
+                Hỗ trợ Esim: <span>Có (Fee 50K) </span>
+            </div>
+            <div class="esim">
+                LH Đặt Hàng Zalo: <span><a href=http://zalo.me/0357855015>0357855015</a></span>
+            </div>
+            <br><marquee><span class="marquee-span"><font color="blue">⭐HTTPS://VANTAY.CLICK⭐</font></span></marquee>
+        </div>
+    </div>
+    
+        <div class="price-box">
+        <h3>Giá Sim Đã Kích Hoạt</h3>
+        <p class="price discounted-price">730.000đ</p>
+        <p class="price original-price">Giá gốc 1.600.000đ</p>   
+    </div>
+    <div class="price-box">
+        <h3>Giá Nguyên Kít Chưa Kích Hoạt</h3>
+        <p class="price discounted-price">890.000đ</p>
+        <p class="price original-price">Giá gốc 1.700.000đ</p>
+    </div>
+</div>
+  
+    <div class="separator"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            BIG50Y
+            <span>vinaphone</span>
+        </div>
+        <div class="card-body">
+            <div class="info">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data">
+                    <span>5GB<br>Data/Ngày</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Nội mạng">
+                    <span class="disabled">Có<br>Nội mạng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Ngoại mạng">
+                    <span class="disabled">Có<br>Ngoại mạng</span>
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    <li>Mỗi ngày 5Gb tốc độ cao</li>
+                    <li>Miễn phí data Zalo, YouTube, TikTok</li>
+                    <li>Mỗi tháng nạp 50k để gia hạn gói</li>
+                    <li>Dùng lâu dài chưa có thời gian kết thúc</li>
+                    <li>Hàng nguyên kít vào tên chính chủ</li>
+                    <li>Sim nghe gọi bình thường,Multisim...</li>
+                </ul>
+            </div>
+            <div class="esim">
+                Hỗ trợ Esim: <span>Có (Fee 50K) </span>
+            </div>
+          <div class="esim">
+            LH Đặt Hàng Zalo: <span><a href=http://zalo.me/0357855015>0357855015</a></span>
+            </div>
+           <br><marquee><span class="marquee-span"><font color="blue">⭐HTTPS://VANTAY.CLICK⭐</font></span></marquee>
+        </div>
+    </div>
+    
+     
+    <div class="price-box">
+        <h3>Giá Sim Gồm Gói 14 Tháng </h3>
+        <p class="price discounted-price">1.100.000đ</p>
+       <p class="price original-price">Giá gốc 1.490.000đ</p>
+    </div>
+
+        <div class="price-box">
+        <h3>Giá Nguyên Kít Gồm Gói 1 Tháng </h3>
+        <p class="price discounted-price">499.000đ</p>
+       <p class="price original-price">Giá gốc 680.000đ</p>
+    </div>
+</div>
+  <div class="separator"></div>
+  <div class="container">
+    <div class="card">
+        <div class="card-header">
+            VINA125
+            <span>vinaphone</span>
+        </div>
+        <div class="card-body">
+            <div class="info">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data">
+                    <span>125GB<br>Data/Tháng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Nội mạng">
+                    <span class="disabled">Không<br>Nội mạng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Ngoại mạng">
+                    <span class="disabled">Không<br>Ngoại mạng</span>
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    <li>Có 125GB Tốc Độ Cao, Hết Dung Lượng Ngừng Truy Cập</li>
+                    <li>Trọn Gói 12 Tháng, Không Phải Nạp Thêm Tiền</li>
+                    <li>Sim trả trước kích gói 16/03/2025 </li>
+                    <li>Sim sẵn dùng chỉ để vào mạng</li>
+                </ul>
+            </div>
+            <div class="esim">
+                Hỗ trợ Esim: <span>Có (Fee 50K) </span>
+            </div>
+          <div class="esim">
+            LH Đặt Hàng Zalo: <span><a href=http://zalo.me/0357855015>0357855015</a></span>
+            </div>
+            <br><marquee><span class="marquee-span"><font color="blue">⭐HTTPS://VANTAY.CLICK⭐</font></span></marquee>
+        </div>
+    </div>
+    
+    <div class="price-box">
+        <h3>Sẵn Dùng Đủ 12 Tháng</h3>
+        <p class="price discounted-price">660.000đ </p>
+       <p class="price original-price">Giá gốc 899.000đ </p>
+    </div>
+    <div class="price-box">
+        <h3>Sẵn Dùng 11 Tháng</h3>
+        <p class="price discounted-price">600.000đ - Hết Hàng</p>
+       <p class="price original-price">Giá gốc 799.000đ </p>
+    </div>
+</div>
+
+  <div class="separator"></div>
+
+  <div class="container">
+    <div class="card">
+        <div class="card-header">
+            VD89P
+            <span>vinaphone</span>
+        </div>
+        <div class="card-body">
+            <div class="info">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data">
+                    <span>120GB<br>Data/Tháng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Nội mạng">
+                    <span class="disabled">1500 Phút<br>Nội mạng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Ngoại mạng">
+                    <span class="disabled">50 Phút<br>Ngoại mạng</span>
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    <li>Có 4GB/Ngày, Hết Dung Lượng Ngừng Truy Cập</li>
+                    <li>Có 1500 phút gọi nội mạng,50 phút ngoại mạng</li>
+                    <li>Sim trả trước đã lên sẵn gói 3 tháng, gia hạn tháng 89K </li>
+                    <li>Sim sẵn dùng lên gói 17/03, có thể làm chính chủ</li>
+                </ul>
+            </div>
+            <div class="esim">
+                Hỗ trợ Esim: <span>Có (Fee 50K) </span>
+            </div>
+          <div class="esim">
+            LH Đặt Hàng Zalo: <span><a href=http://zalo.me/0357855015>0357855015</a></span>
+            </div>
+            <br><marquee><span class="marquee-span"><font color="blue">⭐HTTPS://VANTAY.CLICK⭐</font></span></marquee>
+        </div>
+    </div>
+    
+    <div class="price-box">
+        <h3>Giá Sim Gồm Gói 3 Tháng</h3>
+        <p class="price discounted-price">360.000đ </p>
+       <p class="price original-price">Giá gốc 599.000đ </p>
+    </div>
+    <div class="price-box">
+        <h3>Giá Sim Gồm Gói 6 Tháng</h3>
+        <p class="price discounted-price">700.000đ - Hết Hàng</p>
+       <p class="price original-price">Giá gốc 899.000đ </p>
+    </div>
+</div>
+
+  <div class="separator"></div>
+
+  <div class="container">
+    <div class="card">
+        <div class="card-header">
+            D159V
+            <span>vinaphone</span>
+        </div>
+        <div class="card-body">
+            <div class="info">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data">
+                    <span>180GB<br>Data/Tháng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Nội mạng">
+                    <span class="disabled">1500 Phút<br>Nội mạng</span>
+                </div>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Ngoại mạng">
+                    <span class="disabled">200 Phút<br>Ngoại mạng</span>
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    <li>Có 6GB/Ngày, Hết Dung Lượng Ngừng Truy Cập</li>
+                    <li>Có 1500 phút gọi nội mạng,50 phút ngoại mạng</li>
+                    <li>Sim trả trước đã lên sẵn gói 1 tháng, gia hạn tháng 159K </li>
+                    <li>Sim sẵn dùng có thể làm chính chủ</li>
+                </ul>
+            </div>
+            <div class="esim">
+                Hỗ trợ Esim: <span>Có (Fee 50K) </span>
+            </div>
+          <div class="esim">
+            LH Đặt Hàng Zalo: <span><a href=http://zalo.me/0357855015>0357855015</a></span>
+            </div>
+            <br><marquee><span class="marquee-span"><font color="blue">⭐HTTPS://VANTAY.CLICK⭐</font></span></marquee>
+        </div>
+    </div>
+    
+    <div class="price-box">
+        <h3>Giá Sim Gồm Gói 1 Tháng</h3>
+        <p class="price discounted-price">290.000đ </p>
+       <p class="price original-price">Giá gốc 399.000đ </p>
+    </div>
+    <div class="price-box">
+        <h3>Giá Sim Gồm Gói 3 Tháng</h3>
+        <p class="price discounted-price">660.000đ - Hết Hàng</p>
+       <p class="price original-price">Giá gốc 899.000đ </p>
+    </div>
+</div>
+
+<div class="separator" align="center">
+
+</div>
+
+<div class="container">
+    <div class="price-box">
+        <h3>Chính Sách Thanh Toán, Giao Hàng & Bảo Hành</h3>
+        <p class="details"><li>eSIM +50K làm online luôn và trả trước.</li></p>
+        <p class="details"><li>SIM vật lý ship COD,người nhận trả phí.</li></p>
+        <p class="details"><li>Thanh toán trước được freeship.</li></p>
+        <p class="details"><li>Giao hàng và thanh toán toàn quốc</li></p>
+        <p class="details"><li>Toàn bộ sim bán ra cam kết đúng gói cước và thời gian sử dụng</li></p>
+        <p class="details"><li>LH CSKH và Bảo Hành (Zalo) : 0357855015  </li></p>
+
+            </div>
+         </div>
+         <footer>
+            <div class="container">
+              <p>© 2025 Bản quyền thuộc về vantay.click .Hỗ trợ 24/7 qua Zalo <a href="https://zalo.me/0357855015"><i class="fab fa-zalo"></i> 0357855015 (Tây) </a></p>
+            </div>
+          </footer>
+</body>
+</html>
