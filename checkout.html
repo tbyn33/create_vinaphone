@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Nhận Đơn Hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 { color: #1e90ff; text-align: center; margin-bottom: 20px; }
+
+        .form-group { margin-bottom: 15px; position: relative; }
+
+        .form-group label { display: block; font-size: 14px; margin-bottom: 5px; color: #555; font-weight: 600; }
+
+        .form-input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .form-input:focus, textarea:focus { border-color: #1e90ff; box-shadow: 0 0 5px rgba(30,144,255,0.2); }
+
+        .btn-submit {
+            width: 100%;
+            background: #1e90ff;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover { background: #0056b3; transform: translateY(-2px); }
+        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
+
+        .back-link { display: block; text-align: center; margin-top: 15px; color: #888; text-decoration: none; font-size: 13px; }
+
+        .error-msg { color: #ff4d4f; font-size: 12px; display: block; margin-top: 5px; min-height: 15px; font-style: italic; }
+        
+        .invalid { border-color: #ff4d4f !important; background-color: #fff1f0; }
+
+        #successMsg { 
+            display: none; 
+            background: #e6ffed; 
+            border: 1px solid #b7eb8f; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-top: 15px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="checkout-container">
+    <h2><i class="fa fa-shopping-cart"></i> Thông Tin Đặt Hàng</h2>
+    <form id="orderForm">
+        <div class="form-group">
+            <label>Họ và tên</label>
+            <input type="text" id="fullname" class="form-input" placeholder="Nguyễn Văn A">
+            <small class="error-msg" id="nameError"></small>
+        </div>
+        
+        <div class="form-group">
+            <label>Số điện thoại</label>
+            <input type="tel" id="phone" class="form-input" placeholder="Ví dụ: 0901234567">
+            <small class="error-msg" id="phoneError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Địa chỉ nhận hàng</label>
+            <textarea id="address" rows="3" placeholder="Số nhà, tên đường, phường/xã..."></textarea>
+            <small class="error-msg" id="addressError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn loại SIM</label>
+            <select id="simType" class="form-input">
+                <option value="">-- Vui lòng chọn --</option>
+                <option value="U1500">Sim U1500 (500GB/tháng)</option>
+                <option value="12TD49">Sim 12TD49 (100GB/12 tháng)</option>
+                <option value="BIG50Y">Sim BIG50Y (5GB/ngày)</option>
+                <option value="9TD49">Sim 9TD49 (100GB/tháng/9 tháng)</option>
+            </select>
+            <small class="error-msg" id="simError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Ghi chú thêm</label>
+            <input type="text" id="note" class="form-input" placeholder="Ví dụ: Lấy sim eSIM">
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">XÁC NHẬN ĐẶT HÀNG</button>
+    </form>
+
+    <a href="WebSimMang.html" class="back-link">← Quay lại trang chủ</a>
+
+    <div id="successMsg">
+        <p style="color: #2e7d32; margin: 0; font-weight: 600;">🎉 Đơn hàng đã được gửi thành công!</p>
+        <p style="color: #555; font-size: 13px; margin: 5px 0 0;">Mình sẽ kiểm tra và liên hệ bạn sớm nhé.</p>
+    </div>
+</div>
+
+<script>
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // 1. Reset trạng thái lỗi
+    let isValid = true;
+    const errorElements = document.querySelectorAll('.error-msg');
+    errorElements.forEach(el => el.innerText = '');
+    
+    const inputs = document.querySelectorAll('.form-input, textarea');
+    inputs.forEach(el => el.classList.remove('invalid'));
+
+    // 2. Lấy dữ liệu
+    const name = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const simChoice = document.getElementById('simType').value;
+    const note = document.getElementById('note').value.trim();
+
+    // 3. Kiểm tra lỗi (Validation)
+    if (name.length < 2) {
+        document.getElementById('nameError').innerText = 'Vui lòng nhập họ tên đầy đủ';
+        document.getElementById('fullname').classList.add('invalid');
+        isValid = false;
+    }
+
+    const phoneRegex = /^(0[3|5|7|8|9])([0-9]{8})$/;
+    if (!phoneRegex.test(phone)) {
+        document.getElementById('phoneError').innerText = 'Số điện thoại không hợp lệ (cần 10 số)';
+        document.getElementById('phone').classList.add('invalid');
+        isValid = false;
+    }
+
+    if (address.length < 10) {
+        document.getElementById('addressError').innerText = 'Vui lòng nhập địa chỉ chi tiết hơn';
+        document.getElementById('address').classList.add('invalid');
+        isValid = false;
+    }
+
+    if (simChoice === "") {
+        document.getElementById('simError').innerText = "Vui lòng chọn một loại SIM";
+        document.getElementById('simType').classList.add('invalid');
+        isValid = false;
+    }
+
+    // 4. Gửi dữ liệu nếu hợp lệ
+    if (isValid) {
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.innerText = "Đang xử lý...";
+        submitBtn.disabled = true;
+
+        const orderData = {
+            data: [{
+                "ho_ten": name,
+                "so_dien_thoai": phone,
+                "dia_chi": address,
+                "loai_sim": simChoice,
+                "ghi_chu": note,
+                "thoi_gian_dat": new Date().toLocaleString('vi-VN')
+            }]
+        };
+
+        fetch('https://sheetdb.io/api/v1/60xdqhv3fl8au', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            // Ẩn form và hiện thông báo thành công
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+            
+            // Sau 3 giây tự động quay về trang chủ
+            setTimeout(() => {
+                window.location.href = "WebSimMang.html";
+            }, 3500);
+        })
+        .catch(err => {
+            alert("❌ Lỗi hệ thống! Vui lòng thử lại sau.");
+            console.error(err);
+            submitBtn.innerText = "XÁC NHẬN ĐẶT HÀNG";
+            submitBtn.disabled = false;
+        });
+    }
+});
+</script>
+
+</body>
+</html>

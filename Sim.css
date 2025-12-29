@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Poppins", sans-serif; 
+}
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #4953a0;
+    --accent-color: #FFD700;
+    --text-dark: #333;
+    --text-light: #f8f8f8;
+    --bg-light: #f4f7f6;
+    --shadow: 0 10px 20px rgba(0,0,0,0.08);
+    --transition: all 0.3s ease;
+}
+
+body { 
+    background: var(--bg-light); 
+    scroll-behavior: smooth; 
+    padding-top: 80px; 
+    color: var(--text-dark);
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    position: fixed; top: 0; left: 0; width: 100%; 
+    background: var(--primary-color);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 5%; z-index: 1000; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar .logo { 
+    color: #fff; font-size: 22px; font-weight: 700; 
+    letter-spacing: 0.5px; text-transform: uppercase;
+}
+
+.navbar ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+
+.navbar ul li a { 
+    color: white; font-size: 16px; text-decoration: none; 
+    font-weight: 500; transition: var(--transition); 
+}
+
+.navbar ul li a:hover { color: var(--accent-color); }
+
+/* --- CONTAINER & LAYOUT --- */
+.container { 
+    display: flex; flex-wrap: wrap; gap: 30px; 
+    padding: 40px 20px; justify-content: center; 
+    max-width: 1200px; margin: 0 auto;
+}
+
+.update-box { 
+    width: 100%; text-align: center; background: var(--secondary-color); 
+    padding: 12px; font-size: 14px; font-weight: 600; 
+    color: #fff; border-radius: 8px; margin-bottom: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* --- CARDS --- */
+.card, .price-box {
+    width: 100%; max-width: 360px; border-radius: 15px; 
+    overflow: hidden; background: #fff; border: none;
+    box-shadow: var(--shadow); transition: var(--transition); 
+    padding: 0; /* Để header sát mép */
+}
+
+.card:hover, .price-box:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
+}
+
+.card-header { 
+    background: var(--primary-color); color: #fff; 
+    padding: 20px; font-size: 20px; font-weight: 600; 
+    position: relative; 
+}
+
+.card-header span { 
+    position: absolute; right: 15px; top: 18px; 
+    background: rgba(255,255,255,0.2); color: #fff; 
+    padding: 4px 12px; border-radius: 20px; 
+    font-size: 12px; backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.card-body { padding: 25px; }
+
+/* --- INFO SECTION --- */
+.info { 
+    display: flex; justify-content: space-between; 
+    margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;
+}
+
+.info div img { width: 35px; height: 35px; margin-bottom: 8px; filter: grayscale(0.2); }
+
+.info div span { font-size: 13px; font-weight: 600; color: #555; }
+
+/* --- DETAILS LIST --- */
+.details { text-align: left; margin-bottom: 20px; }
+
+.details ul li { 
+    margin-bottom: 10px; font-size: 14px; 
+    display: flex; align-items: center; color: #444;
+}
+
+.details ul li::before { 
+    content: "✓"; color: #28a745; font-weight: bold; 
+    margin-right: 10px; background: #e8f5e9;
+    width: 20px; height: 20px; display: flex;
+    justify-content: center; align-items: center;
+    border-radius: 50%; font-size: 10px;
+}
+
+/* --- PRICE SECTION --- */
+.price-box { padding: 30px 20px; }
+
+.price-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 18px; }
+
+.price { margin: 15px 0; }
+
+.original-price { color: #999; text-decoration: line-through; font-size: 16px; }
+
+.discounted-price { 
+    color: #e63946; font-size: 28px; font-weight: 700; display: block;
+}
+
+.out-of-stock { 
+    background: #ffebee; color: #c62828; padding: 2px 8px;
+    border-radius: 4px; font-size: 12px; vertical-align: middle;
+}
+
+/* --- FOOTER --- */
+footer { 
+    text-align: center; background: #222; color: #bbb; 
+    padding: 40px 20px; font-size: 14px; margin-top: 50px;
+}
+
+footer a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+
+/* --- STAR RATING --- */
+.stars { display: flex; flex-direction: row-reverse; justify-content: center; }
+
+input.star { display: none; }
+
+label.star { 
+    padding: 5px; font-size: 24px; color: #ddd; 
+    cursor: pointer; transition: var(--transition); 
+}
+
+input.star:checked ~ label.star { color: #ffca08; }
+
+label.star:hover { transform: scale(1.2); color: #ffca08; }
+
+label.star:before { content: '\f005'; font-family: FontAwesome; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .navbar { padding: 10px 15px; }
+    .navbar .logo { font-size: 18px; }
+    .navbar ul { gap: 15px; }
+    .navbar ul li a { font-size: 14px; }
+    .container { padding: 20px 10px; }
+}
+/* --- PRICE BOX (Phần giá sim) --- */
+.price-box { 
+    text-align: center; 
+    background: #ffffff; /* Nền trắng sạch sẽ */
+    border: 2px solid #eef2f7; /* Thêm khung viền nhẹ */
+    border-radius: 12px; 
+    padding: 25px; 
+    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Đổ bóng nhẹ tạo chiều sâu */
+    transition: all 0.3s ease;
+}
+
+.price-box:hover {
+    border-color: #1e90ff; /* Đổi màu khung khi di chuột vào */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(30, 144, 255, 0.15);
+}
+
+.price-box h3 { 
+    color: #1e90ff; 
+    margin-bottom: 12px; 
+    font-size: 19px; 
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.price { 
+    display: flex;
+    flex-direction: column; /* Đẩy giá gốc lên trên giá mới */
+    gap: 5px;
+    align-items: center;
+}
+
+.original-price { 
+    color: #999; 
+    text-decoration: line-through; 
+    font-size: 15px; 
+}
+
+.discounted-price { 
+    color: #ff4d4f; /* Màu đỏ hiện đại */
+    font-size: 26px; 
+    font-weight: 700; 
+}
+
+.out-of-stock { 
+    background: #fff1f0;
+    color: #f5222d; 
+    font-size: 12px; 
+    font-weight: bold; 
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #ffa39e;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+/* Đường kẻ phân cách */
+.separator { 
+    width: 80%; 
+    height: 1px; 
+    background: linear-gradient(to right, transparent, #ddd, transparent); 
+    margin: 20px auto; 
+}
+/* --- BUY NOW BUTTON --- */
+.buy-now-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #1e90ff, #0056b3); /* Gradient màu xanh cuốn hút */
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px; /* Bo tròn hoàn toàn */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3); /* Bóng đổ ấn tượng */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden; /* Quan trọng cho hiệu ứng lấp lánh */
+    margin-top: 25px; /* Khoảng cách với nội dung phía trên */
+}
+
+.buy-now-btn:hover {
+    transform: translateY(-3px) scale(1.02); /* Nút nhích lên và to ra nhẹ */
+    box-shadow: 0 12px 20px rgba(0, 123, 255, 0.45);
+    background: linear-gradient(45deg, #0056b3, #1e90ff); /* Đảo ngược gradient */
+}
+
+/* Hiệu ứng lấp lánh (pulsating glow) */
+.buy-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.6); /* Ánh sáng trắng mờ */
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+    z-index: 1;
+}
+
+.buy-now-btn:hover::before {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
+}
+
+/* Đảm bảo chữ trên nút luôn nằm trên hiệu ứng lấp lánh */
+.buy-now-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Thêm hiệu ứng lắc nhẹ khi hover để tăng sự chú ý */
+.buy-now-btn:hover {
+    animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translateY(-3px) scale(1.02);
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, -3px, 0) scale(1.02); }
+    20%, 80% { transform: translate3d(2px, -3px, 0) scale(1.02); }
+    30%, 50%, 70% { transform: translate3d(-4px, -3px, 0) scale(1.02); }
+    40%, 60% { transform: translate3d(4px, -3px, 0) scale(1.02); }
+}
